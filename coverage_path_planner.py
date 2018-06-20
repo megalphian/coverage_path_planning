@@ -5,6 +5,9 @@ import math
 from enum import Enum
 from shapely.geometry import LineString
 
+#solver = 'GLKH'  # 'GLKH' or 'GLNS'
+solver = 'GLNS'
+
 #Local modules
 from pkg.time_keeping					import time_keeping as tk
 from pkg.poly_operations.hard_coded_lib import polygon_library
@@ -15,7 +18,12 @@ from pkg.discritizers.line 				import min_alt_discrt
 from pkg.discritizers.point 			import point_discrt
 from pkg.discritizers	 				import get_mapping
 from pkg.costs							import dubins_cost
-from pkg.gtsp.GLKH						import solver
+if solver == 'GLKH':
+	from pkg.gtsp.GLKH						import solver
+	SOLVER_LOCATION = "/home/bjgilhul/workspace/labwork/GLKH-1.0/"
+else:
+	from pkg.gtsp.GLNS						import solver
+	SOLVER_LOCATION = "/home/bjgilhul/workspace/labwork/GLNS/"
 from pkg.visuals.static					import coverage_plot as splot
 from pkg.analysis						import tour_length
 from pkg.analysis						import tour_area
@@ -30,8 +38,6 @@ class Robot:
 		self.footprint_width = footprint_width
 		self.dynamics = dynamics
 
-
-GLKH_LOCATION = "/home/sbochkar/misc/GLKH-1.0/"
 
 
 def coverage_path_planner(map_num, robot, method):
@@ -75,7 +81,7 @@ def coverage_path_planner(map_num, robot, method):
 		print("[%18s] Finished computing the cost matrix."%tk.current_time())
 
 		print("[%18s] Generating and launching GTSP instance."%tk.current_time())
-		solver.solve("cpp_test", GLKH_LOCATION, cost_matrix, cluster_list)
+		solver.solve("cpp_test", SOLVER_LOCATION, cost_matrix, cluster_list)
 		print("[%18s] Sovled GTSP instance."%tk.current_time())
 
 
@@ -123,8 +129,8 @@ def coverage_path_planner(map_num, robot, method):
 		print("[%18s] Finished computing the cost matrix."%tk.current_time())
 
 		print("[%18s] Generating and launching GTSP instance."%tk.current_time())
-		solver.solve("cpp_test", GLKH_LOCATION, cost_matrix, cluster_list)
-		print("[%18s] Sovled GTSP instance."%tk.current_time())
+		solver.solve("cpp_test", SOLVER_LOCATION, cost_matrix, cluster_list)
+		print("[%18s] Solved GTSP instance."%tk.current_time())
 
 
 		print("[%18s] Reading the results."%tk.current_time())
@@ -162,8 +168,8 @@ def coverage_path_planner(map_num, robot, method):
 		print("[%18s] Finished computing the cost matrix."%tk.current_time())
 
 		print("[%18s] Generating and launching GTSP instance."%tk.current_time())
-#		solver.solve("gtsp_13_coverage", GLKH_LOCATION, cost_matrix, cluster_list)
-		print("[%18s] Sovled GTSP instance."%tk.current_time())
+#		solver.solve("gtsp_13_coverage", SOLVER_LOCATION, cost_matrix, cluster_list)
+		print("[%18s] Solved GTSP instance."%tk.current_time())
 
 
 		print("[%18s] Reading the results."%tk.current_time())
@@ -231,8 +237,8 @@ def coverage_path_planner(map_num, robot, method):
 		print("[%18s] Finished computing the cost matrix."%tk.current_time())
 
 		print("[%18s] Generating and launching GTSP instance."%tk.current_time())
-		solver.solve("cpp_test", GLKH_LOCATION, cost_matrix, cluster_list)
-		print("[%18s] Sovled GTSP instance."%tk.current_time())
+		solver.solve("cpp_test", SOLVER_LOCATION, cost_matrix, cluster_list)
+		print("[%18s] Solved GTSP instance."%tk.current_time())
 
 
 		print("[%18s] Reading the results."%tk.current_time())

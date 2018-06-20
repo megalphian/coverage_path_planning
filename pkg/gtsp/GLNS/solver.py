@@ -1,10 +1,11 @@
 import os
 
 log_dir = './pkg/gtsp/solver_logs/'
+julia = 'julia'
 
 def solve(problem_name, solver_loc, cost_matrix, cluster_array):
 	"""
-	This function will generate appropriate files for GTSP
+	This function will generate appropriate files for GLNS
 	solver and start the solver.
 
 	:param problem_name: The name of the problem, useful for problem_names
@@ -49,24 +50,6 @@ def solve(problem_name, solver_loc, cost_matrix, cluster_array):
 
 	else:
 
-		cur_dir = os.getcwd()
-
-		problem_file = os.path.abspath(log_dir + problem_name + '.gtsp')
-		param_file = os.path.abspath(log_dir + problem_name + '.par')
-		tour_file = os.path.abspath(log_dir + problem_name + '.tour')
-
-		settings_dict = { 'PROBLEM_FILE': problem_file,
-				'OUTPUT_TOUR_FILE': tour_file,
-				#'ASCENT_CANDIDATES': 500,
-				#'INITIAL_PERIOD': 1000,
-				#'MAX_CANDIDATES': 30,
-				#'MAX_TRIALS': 1000,
-				#'POPULATION_SIZE': 5,
-				#'PRECISION': 10,
-				#'SEED': 1,
-				#'TRACE_LEVEL': 1,
-				'RUNS': 1}
-
 		props_dict = { 'NAME': problem_name,
 				'COMMENT': problem_name+': CPP using GTSP solver',
 				'TYPE': 'AGTSP',
@@ -76,17 +59,11 @@ def solve(problem_name, solver_loc, cost_matrix, cluster_array):
 				'EDGE_WEIGHT_FORMAT': 'FULL_MATRIX'}
 
 		
-		# Write GTSP instance settings
-		with open(param_file, 'w') as f:
-
-			for k, v in settings_dict.iteritems():
-				f.write(k+' = '+str(v)+'\n')
-
 		# Write GTSP instance properties
-		with open(problem_file, "w") as f:
+		with open(problem_name+".gtsp", "w") as f:
 
 			for k, v in props_dict.iteritems():
-				f.write(k+' = '+str(v)+'\n')
+				f.write(k+' : '+str(v)+'\n')
 
 
 			f.write("EDGE_WEIGHT_SECTION\n")
@@ -111,13 +88,18 @@ def solve(problem_name, solver_loc, cost_matrix, cluster_array):
 				row += "-1\n"
 				f.write(row)
 
-
-
 			f.write("EOF\n")
 			f.write("")
 
+		cur_dir = os.getcwd()
+
+		# Move the files to GTSP solver location
+		problemFile = log_dir + problem_name + '.gtsp'
+		problemParams = ' -output=' + cur_dir + '/' + log_dir + problem_name + '.tour'
+		os.system("cp "+problem_name+".gtsp "+problemFile)
+
 		os.chdir(solver_loc)
-		cmd = "./GLKH " + param_file
+		cmd = julia + ' ' + "./GLNScmd.jl " + cur_dir + '/' + problemFile + ' ' + problemParams
 	
 		#print("[%18s] Launching the GLKH solver."%time_keeping.current_time())
 		os.system(cmd)	
@@ -127,18 +109,18 @@ def solve(problem_name, solver_loc, cost_matrix, cluster_array):
 		os.chdir(cur_dir)
 
 
-
 def read_tour(problem_name):
 
 	# Read in the results from the TSP solver results
 	with open('pkg/gtsp/solver_logs/'+problem_name+".tour", 'r') as f:
-		for i in range(6):
+		for i in range(7):
 			f.readline()
 
 		tour = []
 		str = f.readline()
-		while "EOF" not in str and "-1" not in str:
-			tour.append(int(str)-1)
-			str = f.readline()
-
+		if "EOF" not in str and "-1" not in str:
+			import re
+			tourExp = re.compile('\[([0-9, ]+)\]')
+			tour = [int(x)-1 for x in tourExp.search( str ).group(1).split(', ')]
+			
 	return tour
