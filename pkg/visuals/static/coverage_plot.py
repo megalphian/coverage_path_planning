@@ -200,7 +200,9 @@ def plot_tour_dubins(ax, tour, dict_map, r):
 
 		q0 = outgoing_segment.get_exit_info(dir_o)
 		q1 = incoming_segment.get_entrance_info(dir_i)
-		smpls, _ = dubins.path_sample(q0, q1, r, 0.05)
+	
+		path = dubins.shortest_path(q0, q1, r)
+		smpls, _ = path.sample_many(0.05)
 
 		x = []
 		y = []
