@@ -1,4 +1,4 @@
-import edges
+from pkg.decompositions import edges
 
 
 def get_adjacency_as_matrix(P_list):

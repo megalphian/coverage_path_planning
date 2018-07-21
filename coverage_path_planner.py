@@ -11,7 +11,7 @@ solver = 'GLNS'
 #Local modules
 from pkg.time_keeping					import time_keeping as tk
 from pkg.poly_operations.hard_coded_lib import polygon_library
-from pkg.poly_operations.others			import adjacency
+from pkg.decompositions					import adjacency
 from pkg.decompositions.greedy 			import greedy_decompose
 from pkg.decompositions.min_alt			import min_alt_decompose
 from pkg.discritizers.line 				import min_alt_discrt

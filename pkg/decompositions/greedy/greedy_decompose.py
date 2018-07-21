@@ -22,6 +22,7 @@ def decompose(P):
 	decomposition = [[poly.as_tuple_list(), []] for poly in polygons]
 	
 	if not decomposition:
-		print "ERROR! Decomposition resulted in empty list"
-
+		# print "ERROR! Decomposition resulted in empty list"
+		raise SyntaxError
+		
 	return decomposition
