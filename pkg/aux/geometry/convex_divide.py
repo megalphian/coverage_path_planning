@@ -64,7 +64,7 @@ def convex_divide(polygon=[[],[]], init_poss=[], area_req=1.0):
 
 	# Now check the states
 	if index == sites[0] and area_right > area_req*len(sites_right):
-		print "Hits the first case"
+		#print "Hits the first case"
 
 		for front_index in range(sites[0]+1):
 			if polygon_area([boundary[front_index:sites[0]+1],[]]) < area_req*len(sites_right):
@@ -87,7 +87,7 @@ def convex_divide(polygon=[[],[]], init_poss=[], area_req=1.0):
 
 
 	elif index == sites[-1] and area_right < area_req*len(sites_right):
-		print "Hits the second case"
+		#print "Hits the second case"
 
 		for front_index in range(len(boundary)-1,sites[-1],-1):
 			modified_poly = [boundary[front_index:]+boundary[:sites[-1]+1],[]]
@@ -108,7 +108,7 @@ def convex_divide(polygon=[[],[]], init_poss=[], area_req=1.0):
 
 
 	else:
-		print "Hits the third case correctly"
+		#print "Hits the third case correctly"
 
 		higher_area = polygon_area([boundary[:index+1],[]])
 		lower_area = polygon_area([boundary[:index],[]])
@@ -158,9 +158,9 @@ q = [(0,1),(0,1),(0,1)]
 
 r,l = convex_divide(polygon=P, init_poss=q, area_req=7.0/3.0)
 
-print r
-print l
+# print r
+# print l
 
-print polygon_area(r["polygon"])
-print polygon_area(l["polygon"])
-print polygon_area(r["polygon"])+polygon_area(l["polygon"])
+# print polygon_area(r["polygon"])
+# print polygon_area(l["polygon"])
+# print polygon_area(r["polygon"])+polygon_area(l["polygon"])

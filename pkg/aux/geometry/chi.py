@@ -66,6 +66,6 @@ P = [[(0,0),(1,0),(1,1),(0,1)],[]]
 q = (-1,-1)
 r = 0.5
 
-print chi(polygon=P, init_pos=q, radius=r, lin_penality=1.0, angular_penalty=1.0/360.0)
-print polygon_area(polygon=P)/r
-print compute_num_contours(polygon=P, radius=r)
+print( chi(polygon=P, init_pos=q, radius=r, lin_penality=1.0, angular_penalty=1.0/360.0))
+print( polygon_area(polygon=P)/r)
+print( compute_num_contours(polygon=P, radius=r))
