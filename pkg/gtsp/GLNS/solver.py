@@ -1,6 +1,6 @@
 import os
 
-log_dir = './pkg/gtsp/solver_logs/'
+log_dir = './gtsp/solver_logs/'
 julia = 'julia'
 
 def solve(problem_name, solver_loc, cost_matrix, cluster_array):
@@ -28,7 +28,7 @@ def solve(problem_name, solver_loc, cost_matrix, cluster_array):
 
 		with open(problem_name+".txt", "w") as f:
 			# Write the problem properties first
-			for k, v in props_simpl_dict.iteritems():
+			for k, v in props_simpl_dict.items():
 				f.write(k+': '+str(v)+'\n')
 
 			# Write the node in cluster information
@@ -50,7 +50,7 @@ def solve(problem_name, solver_loc, cost_matrix, cluster_array):
 
 	else:
 
-		props_dict = { 'NAME': problem_name,
+		props_dict = { 
 				'COMMENT': problem_name+': CPP using GTSP solver',
 				'TYPE': 'AGTSP',
 				'DIMENSION': num_nodes,
@@ -58,11 +58,13 @@ def solve(problem_name, solver_loc, cost_matrix, cluster_array):
 				'EDGE_WEIGHT_TYPE': 'EXPLICIT',
 				'EDGE_WEIGHT_FORMAT': 'FULL_MATRIX'}
 
-		
 		# Write GTSP instance properties
 		with open(problem_name+".gtsp", "w") as f:
 
-			for k, v in props_dict.iteritems():
+			# the name has to come first or the heading isn't recognized
+			f.write( 'NAME : ' + problem_name + '\n' )
+
+			for k, v in props_dict.items():
 				f.write(k+' : '+str(v)+'\n')
 
 
@@ -112,7 +114,7 @@ def solve(problem_name, solver_loc, cost_matrix, cluster_array):
 def read_tour(problem_name):
 
 	# Read in the results from the TSP solver results
-	with open('pkg/gtsp/solver_logs/'+problem_name+".tour", 'r') as f:
+	with open(log_dir+problem_name+'.tour', 'r') as f:
 		for i in range(7):
 			f.readline()
 
