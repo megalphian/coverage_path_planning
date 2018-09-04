@@ -61,11 +61,17 @@ def solve(problem_name, solver_loc, cost_matrix, cluster_array):
 		# Write GTSP instance properties
 		with open(problem_name+".gtsp", "w") as f:
 
-			# the name has to come first or the heading isn't recognized
+			# the name has to come first or the heading isn't recognized -- and apparently other
+			# things too -- the arg parse function for GNLS has issus...
 			f.write( 'NAME : ' + problem_name + '\n' )
+			f.write( 'TYPE : AGTSP\n' )
+			f.write( 'DIMENSION : ' + str(props_dict['DIMENSION']) + '\n' )
+			f.write( 'GTSP_SETS : ' + str(props_dict['GTSP_SETS']) + '\n' )
+			f.write( 'EDGE_WEIGHT_TYPE : ' + str(props_dict['EDGE_WEIGHT_TYPE']) + '\n' )
+			f.write( 'EDGE_WEIGHT_FORMAT : ' + str(props_dict['EDGE_WEIGHT_FORMAT']) + '\n' )
 
-			for k, v in props_dict.items():
-				f.write(k+' : '+str(v)+'\n')
+			# for k, v in props_dict.items():
+			# 	f.write(k+' : '+str(v)+'\n')
 
 
 			f.write("EDGE_WEIGHT_SECTION\n")
