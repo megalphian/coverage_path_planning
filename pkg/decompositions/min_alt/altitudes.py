@@ -15,12 +15,6 @@ import numpy as np
 import visilibity as vis
 
 
-<< << << < HEAD
-== == == =
-
->>>>>> > 977dcaab0c2d498ae2f6d6ef7021c06ac7ffe000
-
-
 def find_transition_point(s_orig, theta, cut_origin):
     """
     Returns transition for a polygon, a cut space segment, and a direction of
@@ -107,12 +101,6 @@ def find_best_transition_point(s, cut_origin, dir_l, dir_r):
         else:
             return t_r
 
-
-<< << << < HEAD
-== == == =
-
-
->>>>>> > 977dcaab0c2d498ae2f6d6ef7021c06ac7ffe000
 
 
 def find_cone_of_bisection(P, v):
