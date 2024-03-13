@@ -33,7 +33,7 @@ def decompose(P):
         polygon = trimesh_polygons.projected(mesh_part, [0, 0, 1])
         convex_polys.append(polygon)
 
-    ##
+    ## Debug
     # # plot the convex decomposition in matplotlib
     # from matplotlib import pyplot as plt
     # for p in convex_polys:
