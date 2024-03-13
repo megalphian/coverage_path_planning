@@ -18,6 +18,8 @@ import math
 from enum import Enum
 from shapely.geometry import LineString
 
+from shapely.geometry import Polygon as ShapelyPolygon
+
 # solver = 'GLKH'  # 'GLKH' or 'GLNS'
 solver = 'GLNS'
 
@@ -27,7 +29,7 @@ if solver == 'GLKH':
     SOLVER_LOCATION = "/home/bjgilhul/workspace/labwork/GLKH-1.0/"
 else:
     from pkg.gtsp.GLNS import solver
-    SOLVER_LOCATION = "/home/bjgilhul/workspace/labwork/GLNS/"
+    SOLVER_LOCATION = "Utils/GLNS.jl"
 
 
 class Robot:
@@ -315,4 +317,4 @@ def coverage_path_planner(map_num, robot, method):
 if __name__ == "__main__":
 
     robot = Robot(0.2, "dubins")
-    coverage_path_planner(12, robot, 3)
+    coverage_path_planner(5, robot, 3)
