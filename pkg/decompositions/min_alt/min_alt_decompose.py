@@ -308,5 +308,5 @@ else:
     from ...poly_operations.others import chain_combination
     from ...poly_operations.others import reflex
     from ...poly_operations.others import operations
-    from decompositions import adjacency
-    from decompositions import edges
+    from pkg.decompositions import adjacency
+    from pkg.decompositions import edges

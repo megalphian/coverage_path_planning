@@ -38,4 +38,4 @@ if __name__ == '__main__':
         #from poly_operations.others import adjancency_edges
         import adjacency_edges as adj
 else:
-    import poly_operations.others.adjacency_edges as adj
+    import pkg.poly_operations.others.adjacency_edges as adj

@@ -83,4 +83,4 @@ if __name__ == '__main__':
         from aux.geometry import rotation
         import reflex
 else:
-    from poly_operations.others import adjacency_edges as adj_e
+    from pkg.poly_operations.others import adjacency_edges as adj_e

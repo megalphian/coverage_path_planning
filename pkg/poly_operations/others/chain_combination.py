@@ -230,4 +230,4 @@ if __name__ == '__main__':
         print(combine_chains([[(0, 0)], []], 0))
 else:
     from ...aux.geometry import rotation
-    import poly_operations.others.reflex
+    import pkg.poly_operations.others.reflex

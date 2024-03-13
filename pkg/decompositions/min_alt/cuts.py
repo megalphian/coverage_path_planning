@@ -6,8 +6,8 @@ from shapely.geometry import LineString
 from shapely.geometry.polygon import orient
 
 
-from decompositions.min_alt.cone_of_bisection import compute as cb_compute
-from decompositions.min_alt.visib_polyg import compute as vp_compute
+from pkg.decompositions.min_alt.cone_of_bisection import compute as cb_compute
+from pkg.decompositions.min_alt.visib_polyg import compute as vp_compute
 
 from math import sqrt
 
